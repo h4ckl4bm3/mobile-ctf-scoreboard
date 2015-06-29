@@ -1,0 +1,2 @@
+class IntegritiesController < ApplicationController
+end

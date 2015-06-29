@@ -1,0 +1,2 @@
+class FlagSubmissionsController < ApplicationController
+end
