@@ -1,4 +1,44 @@
 Rails.application.routes.draw do
+  get 'integrities/index'
+
+  get 'integrities/show'
+
+  get 'availabilities/index'
+
+  get 'availabilities/show'
+
+  get 'flag_submissions/index'
+
+  get 'flag_submissions/show'
+
+  get 'flag_submissions/new'
+
+  get 'flags/index'
+
+  get 'flags/show'
+
+  get 'messages/index'
+
+  get 'messages/show'
+
+  get 'hacks/show'
+
+  get 'hacks/index'
+
+  get 'hacks/create'
+
+  get 'hacks/new'
+
+  get 'teams/create'
+
+  get 'teams/show'
+
+  get 'teams/index'
+
+  get 'teams/update'
+
+  get 'hacks/show'
+
   devise_for :teams
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
