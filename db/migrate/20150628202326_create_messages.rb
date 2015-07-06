@@ -4,6 +4,7 @@ class CreateMessages < ActiveRecord::Migration
       t.string :title
       t.string :message
       t.timestamps null: false
+      t.references :team, index: true
     end
   end
 end

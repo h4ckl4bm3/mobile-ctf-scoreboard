@@ -20,40 +20,74 @@ ActiveRecord::Schema.define(version: 20150630011355) do
     t.boolean  "success"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "team_id"
+    t.integer  "round_id"
+    t.integer  "hack_id"
   end
+
+  add_index "availabilities", ["hack_id"], name: "index_availabilities_on_hack_id", using: :btree
+  add_index "availabilities", ["round_id"], name: "index_availabilities_on_round_id", using: :btree
+  add_index "availabilities", ["team_id"], name: "index_availabilities_on_team_id", using: :btree
 
   create_table "flag_submissions", force: :cascade do |t|
     t.string   "flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "team_id"
+    t.integer  "round_id"
+    t.integer  "owner_id"
   end
+
+  add_index "flag_submissions", ["owner_id"], name: "index_flag_submissions_on_owner_id", using: :btree
+  add_index "flag_submissions", ["round_id"], name: "index_flag_submissions_on_round_id", using: :btree
+  add_index "flag_submissions", ["team_id"], name: "index_flag_submissions_on_team_id", using: :btree
 
   create_table "flags", force: :cascade do |t|
     t.string   "flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "team_id"
+    t.integer  "round_id"
   end
+
+  add_index "flags", ["round_id"], name: "index_flags_on_round_id", using: :btree
+  add_index "flags", ["team_id"], name: "index_flags_on_team_id", using: :btree
 
   create_table "hacks", force: :cascade do |t|
     t.string   "hack"
     t.boolean  "success"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "team_id"
+    t.integer  "target_id"
+    t.integer  "round_id"
   end
+
+  add_index "hacks", ["round_id"], name: "index_hacks_on_round_id", using: :btree
+  add_index "hacks", ["target_id"], name: "index_hacks_on_target_id", using: :btree
+  add_index "hacks", ["team_id"], name: "index_hacks_on_team_id", using: :btree
 
   create_table "integrities", force: :cascade do |t|
     t.boolean  "success"
     t.string   "method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "team_id"
+    t.integer  "round_id"
   end
+
+  add_index "integrities", ["round_id"], name: "index_integrities_on_round_id", using: :btree
+  add_index "integrities", ["team_id"], name: "index_integrities_on_team_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.string   "title"
     t.string   "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "team_id"
   end
+
+  add_index "messages", ["team_id"], name: "index_messages_on_team_id", using: :btree
 
   create_table "rounds", force: :cascade do |t|
     t.datetime "created_at", null: false
