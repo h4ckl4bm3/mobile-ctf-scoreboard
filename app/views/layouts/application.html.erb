@@ -7,8 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          MobileCTF
+        </a>
+      </div>
+    </div>
+  </nav>
 
-<%= yield %>
+      <div class="container">
+        <%= yield %>
+      </div>
 
+      <div class="container">
+        <p style="text-align:center;margin-top:40px;">
+          MITRE Cyber Academy&trade;
+        </p>
+      </div>
 </body>
 </html>

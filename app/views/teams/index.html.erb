@@ -1,2 +1,38 @@
-<h1>Teams#index</h1>
-<p>Find me in app/views/teams/index.html.erb</p>
+<div class="row" >
+  <div class="col-12">
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Team Affiliation
+        </th>
+        <th>
+          Team Captain
+        </th>
+        <th>
+          Points
+        </th>
+      </tr>
+      <% if !@teams.blank? %>
+        <% for team in @teams%>
+          <tr>
+            <td>
+              Not sure
+            </td>
+            <td>
+              what todo
+            </td>
+            <td>
+              here
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan=3>
+            <h1>No Teams to display</h1>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
