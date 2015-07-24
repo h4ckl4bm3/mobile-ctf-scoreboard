@@ -1,60 +1,12 @@
 Rails.application.routes.draw do
-  get 'users/index'
-
-  get 'users/show'
-
-  get 'users/update'
-
-  get 'users/create'
-
-  get 'user/index'
-
-  get 'user/show'
-
-  get 'user/update'
-
-  get 'user/create'
-
+  resources :users, only: [:index, :show]
   devise_for :users
-  get 'integrities/index'
+  get '/' => 'users#index'
 
-  get 'integrities/show'
-
-  get 'availabilities/index'
-
-  get 'availabilities/show'
-
-  get 'flag_submissions/index'
-
-  get 'flag_submissions/show'
-
-  get 'flag_submissions/new'
-
-  get 'flags/index'
-
-  get 'flags/show'
-
-  get 'messages/index'
-
-  get 'messages/show'
-
-  get 'hacks/show'
-
-  get 'hacks/index'
-
-  get 'hacks/create'
-
-  get 'hacks/new'
-
-  get 'teams/create'
-
-  get 'teams/show'
-
-  get 'teams/index'
-
-  get 'teams/update'
-
-  get 'hacks/show'
+  resources :integrities, only: [:index, :show]
+  resources :flag_submissions, only: [:index, :show, :new]
+  resources :flags, only: [:index, :show]
+  resources :messages, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
