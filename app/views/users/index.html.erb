@@ -3,32 +3,33 @@
     <table class="table table-striped">
       <tr>
         <th>
-          Team Affiliation
-        </th>
-        <th>
-          Team Captain
+          Team Name
         </th>
         <th>
           Points
+        </th>
+        <th>
+          Points This Round
         </th>
       </tr>
       <% if !@teams.blank? %>
         <% for team in @teams%>
           <tr>
             <td>
-              Not sure
+              <%= team.display_name %>
+              <% if current_user == team %> (My Team) <% end %>
             </td>
             <td>
-              what todo
+              <%= team.score %>
             </td>
             <td>
-              here
+              <%= team.score_for_round %>
             </td>
           </tr>
         <% end %>
       <% else %>
         <tr>
-          <td colspan=3>
+          <td colspan=4>
             <h1>No Teams to display</h1>
           </td>
         </tr>
