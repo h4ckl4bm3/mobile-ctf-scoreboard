@@ -10,10 +10,34 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
           MobileCTF
         </a>
       </div>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Will create a model form for submission -->
+        <% if current_user %>
+          <% if current_user.admin? %>
+            <!-- Possibly make an admin page? -->
+          <% else %>
+            <li><%= link_to "My Team", team_path(current_user) %></li>
+            <li><%= link_to "Submit Flag", new_flag_submission_path %></a></li> 
+            <!-- Maybe have flags be dropdown (Own flags and Submitted Flags) <li class="dropdown"></li> -->
+            <li><%= link_to "Flags Owned", flags_path %></a></li> 
+            <li><%= link_to "Integrities", integrities_path %></a></li> 
+            <li><%= link_to "Messages", messages_path %></a></li> 
+          <% end %>
+          <li><%= link_to "Log Out", "/signout" %></li>
+        <% else %>
+          <li><%= link_to "Log In", "/signin" %></li>
+        <% end %>
+      </ul>
     </div>
   </nav>
 

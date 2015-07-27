@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :show]
+  resources :teams, controller: 'users',  only: [:index, :show]
+  
+  # devise
   devise_for :users
+  devise_scope :user do
+    get 'signin', :to => 'devise/sessions#new'
+    get 'signout', :to => 'devise/sessions#destroy'
+  end
+  
   get '/' => 'users#index'
 
   resources :integrities, only: [:index, :show]
