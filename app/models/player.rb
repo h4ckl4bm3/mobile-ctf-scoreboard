@@ -7,6 +7,7 @@ class Player < User
   
 
   def score
+    # Still need to figure this out
     points = 0
     points
   end

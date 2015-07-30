@@ -9,7 +9,8 @@ class FlagSubmissionsController < ApplicationController
     # Shows flag submission (which team, when, what flag was tried, and success)
   end
 
-  def new
+  def create
     # Used to submit a new flag
+    puts(params)
   end
 end
