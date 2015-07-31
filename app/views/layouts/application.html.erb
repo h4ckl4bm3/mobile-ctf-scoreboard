@@ -28,8 +28,8 @@
           <% else %>
             <li><%= link_to "My Team", team_path(current_user) %></li>
             <!-- Create a model form? -->
-            <li><a href="#" data-toggle="modal" data-target="#new-submission"> Submit Flag</a></li> 
-            <!-- Maybe have flags be dropdown (Own flags and Submitted Flags) <li class="dropdown"></li> -->  
+            <li><a href="#" data-toggle="modal" data-target="#new-submission"> Submit Flag</a></li>
+            <!-- Maybe have flags be dropdown (Own flags and Submitted Flags) <li class="dropdown"></li> -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flags <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -37,8 +37,8 @@
                 <li><%= link_to "Flags Submitted", flag_submissions_path %></li>
               </ul>
             </li>
-            <li><%= link_to "Integrities", integrities_path %></a></li> 
-            <li><%= link_to "Messages", messages_path %></a></li> 
+            <li><%= link_to "Integrities", integrities_path %></a></li>
+            <li><%= link_to "Messages", messages_path %></a></li>
           <% end %>
           <li><%= link_to "Log Out", "/signout" %></li>
         <% else %>
@@ -59,16 +59,16 @@
             <div class="form-group">
               Opposing <%= label_tag :team %><br />
 
-              <%= text_field_tag :team, autofocus: true, placeholder: "Opposing Team's Id", class: "form-control" %>
+              <%= text_field_tag(:team, nil, placeholder: "Opposing Team's Id", class: "form-control") %>
             </div>
 
             <div class="form-group">
               <%= label_tag :flag%><br />
-              <%= text_field_tag :flag, autocomplete: "off", placeholder: "Opposing Team's Flag", class: "form-control" %>
+              <%= text_field_tag :flag, nil, placeholder: "Opposing Team's Flag", class: "form-control" %>
             </div>
 
             <div class="form-group">
-              <%= submit_tag class: "btn btn-primary" %>
+              <%= submit_tag nil, class: "btn btn-primary" %>
             </div>
           <% end %>
         </div>
@@ -76,7 +76,7 @@
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
       </div>
-    </div>           
+    </div>
   </div>
   <div class="container">
     <%= yield %>

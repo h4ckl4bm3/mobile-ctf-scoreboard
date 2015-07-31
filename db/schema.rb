@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20150724011524) do
     t.datetime "start"
     t.datetime "finish"
     t.integer  "round_id"
+    t.integer  "flag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "attack_periods", ["flag_id"], name: "index_attack_periods_on_flag_id", using: :btree
   add_index "attack_periods", ["round_id"], name: "index_attack_periods_on_round_id", using: :btree
 
   create_table "defend_periods", force: :cascade do |t|
@@ -38,8 +40,10 @@ ActiveRecord::Schema.define(version: 20150724011524) do
 
   create_table "flag_submissions", force: :cascade do |t|
     t.string   "flag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "submitted_at"
+    t.boolean  "success"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.integer  "round_id"
     t.integer  "owner_id"

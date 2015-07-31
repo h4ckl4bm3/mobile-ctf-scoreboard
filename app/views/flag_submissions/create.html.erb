@@ -1,0 +1,8 @@
+<% if @success %>
+  <h1 class="text-center"> Congratulations</h1>
+  <p class="text-center">
+    You have successfully submitted the flag against the <% @defending_team.affiliation %> team
+  </p>
+<% else %>
+  <h1 class="text-center"> Sorry, try again</h1>
+<% end %>
