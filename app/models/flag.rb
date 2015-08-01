@@ -1,5 +1,5 @@
 class Flag < ActiveRecord::Base
   belongs_to :user
   belongs_to :round
-  has_one :attack_period
+  belongs_to :attack_period
 end

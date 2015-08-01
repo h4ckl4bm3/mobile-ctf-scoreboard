@@ -1,4 +1,4 @@
 class AttackPeriod < ActiveRecord::Base
   belongs_to :round
-  belongs_to :flag
+  has_many :flags
 end
