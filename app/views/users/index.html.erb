@@ -2,53 +2,66 @@
 
   <div class="col-12">
     <table class="table table-striped">
-      <tr>
-        <th>
-          Team Name
-        </th>
-        <th>
-          Points
-        </th>
-        <th>
-          Points This Round
-        </th>
-      </tr>
-      <% if current_user %>
+      <thead>
         <tr>
-          <td>
-            <%= current_user.display_name %> (My Team)
-          </td>
-          <td>
-            <%= current_user.score %>
-          </td>
-          <td>
-            <%= current_user.score_for_round %>
-          </td>
+          <th>
+            Id
+          </th>
+          <th>
+            Team Name
+          </th>
+          <th>
+            Points
+          </th>
+          <th>
+            Points This Round
+          </th>
         </tr>
-      <% end %>
-      <% if !@teams.blank? %>
-        <% for team in @teams%>
-          <% if current_user != team %>
-            <tr>
-              <td>
-                <%= team.display_name %>
-              </td>
-              <td>
-                <%= team.score %>
-              </td>
-              <td>
-                <%= team.score_for_round %>
-              </td>
-            </tr>
-          <% end %>
+      </thead>
+      <tbody>
+        <% if current_user %>
+          <tr>
+            <th>
+              <%= current_user.id %>
+            </th>
+            <td>
+              <%= current_user.display_name %> (My Team)
+            </td>
+            <td>
+              <%= current_user.score %>
+            </td>
+            <td>
+              <%= current_user.score_for_round %>
+            </td>
+          </tr>
         <% end %>
-      <% else %>
-        <tr>
-          <td colspan=4>
-            <h1>No Teams to display</h1>
-          </td>
-        </tr>
-      <% end %>
+        <% if !@teams.blank? %>
+          <% for team in @teams%>
+            <% if current_user != team %>
+              <tr>
+                <th>
+                  <%= team.id %>
+                </th>
+                <td>
+                  <%= team.display_name %>
+                </td>
+                <td>
+                  <%= team.score %>
+                </td>
+                <td>
+                  <%= team.score_for_round %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan=4>
+              <h1>No Teams to display</h1>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   </div>
 </div>
