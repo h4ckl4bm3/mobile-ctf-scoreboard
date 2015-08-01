@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/' => 'users#index'
 
   resources :integrities, only: [:index, :show]
-  resources :flag_submissions, only: [:index, :show, :new]
+  resources :flag_submissions, only: [:index, :show, :create]
   resources :flags, only: [:index, :show]
   resources :messages, only: [:index, :show]
 
