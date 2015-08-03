@@ -20,7 +20,7 @@ rake mobile_ctf_scoreboard:load_defend_period\[15,1,02:27:00\]
 
 # Create Attack Periods
 rake mobile_ctf_scoreboard:load_attack_period\[15,4,00:28:00\]
-rake mobile_ctf_scoreboard:load_attack_period\[15,4,01:20:00\]
+rake mobile_ctf_scoreboard:load_attack_period\[15,4,01:18:00\]
 rake mobile_ctf_scoreboard:load_attack_period\[15,4,02:08:00\]
 rake mobile_ctf_scoreboard:load_attack_period\[15,4,02:43:00\]
 

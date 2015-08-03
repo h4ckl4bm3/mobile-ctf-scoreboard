@@ -1,2 +1,49 @@
-<h1>Flags#index</h1>
-<p>Find me in app/views/flags/index.html.erb</p>
+<div class="row" >
+
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Flag
+          </th>
+          <th>
+            Attack Period
+          </th>
+          <th>
+            Round
+          </th>
+          <th>
+            Times Stolen
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if !@flags.blank? %>
+          <% for flag in @flags%>
+            <tr>
+              <td>
+                <%= flag.flag %>
+              </td>
+              <td>
+                <%= flag.attack_period.start %> - <%= flag.attack_period.finish %>
+              </td>
+              <td>
+                <%= flag.attack_period.round.start %> - <%= flag.attack_period.round.finish %>
+              </td>
+              <td>
+                <%= flag.times_stolen %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan=4>
+              <h1>No Flags to display</h1>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
