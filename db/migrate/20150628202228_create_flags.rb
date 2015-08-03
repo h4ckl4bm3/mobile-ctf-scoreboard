@@ -4,7 +4,6 @@ class CreateFlags < ActiveRecord::Migration
       t.string :flag
       t.timestamps null: false
       t.references :user, index: true
-      t.references :round, index: true
       t.references :attack_period, index: true
     end
   end

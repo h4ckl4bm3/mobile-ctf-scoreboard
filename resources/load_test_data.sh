@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Load users
-rake mobile_ctf_scoreboard:load_user\[test@example.com,test1234,tester0\]
-rake mobile_ctf_scoreboard:load_user\[testing@example.com,test1234,tester1\]
-rake mobile_ctf_scoreboard:load_user\[tester@example.com,test1234,tester2\]
-rake mobile_ctf_scoreboard:load_user\[tests@example.com,test1234,tester3\]
-rake mobile_ctf_scoreboard:load_user\[testing2@example.com,test1234,tester4\]
+rake mobile_ctf_scoreboard:load_player\[test@example.com,test1234,tester0\] RAILS_ENV=development
+rake mobile_ctf_scoreboard:load_player\[testing@example.com,test1234,tester1\] RAILS_ENV=development
+rake mobile_ctf_scoreboard:load_player\[tester@example.com,test1234,tester2\] RAILS_ENV=development
+rake mobile_ctf_scoreboard:load_player\[tests@example.com,test1234,tester3\] RAILS_ENV=development
+rake mobile_ctf_scoreboard:load_player\[testing2@example.com,test1234,tester4\] RAILS_ENV=development
 
 # Create Rounds (2 with one attack/defend, 1 with 2)
 rake mobile_ctf_scoreboard:load_round\[00:12:00,00:47:00\]
@@ -27,5 +27,5 @@ rake mobile_ctf_scoreboard:load_attack_period\[15,4,02:43:00\]
 # Create a new flag for each Attack Round
 rake mobile_ctf_scoreboard:load_flags_for_period\[00:33:00\]
 rake mobile_ctf_scoreboard:load_flags_for_period\[01:25:00\]
-rake mobile_ctf_scoreboard:load_flags_for_period\[02:12:00\]
+rake mobile_ctf_scoreboard:load_flags_for_period\[02:13:00\]
 rake mobile_ctf_scoreboard:load_flags_for_period\[02:48:00\]
