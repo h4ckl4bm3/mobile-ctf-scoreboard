@@ -26,10 +26,24 @@
                 <%= flag.flag %>
               </td>
               <td>
-                <%= flag.attack_period.start %> - <%= flag.attack_period.finish %>
+                <div class="text-center">
+                  from
+                </div>
+                <%= flag.attack_period.start %><br/>
+                <div class="text-center">
+                  to
+                </div>
+                <%= flag.attack_period.finish %>
               </td>
               <td>
-                <%= flag.attack_period.round.start %> - <%= flag.attack_period.round.finish %>
+                <div class="text-center">
+                  from
+                </div>
+                <%= flag.attack_period.round.start %><br/>
+                <div class="text-center">
+                  to
+                </div>
+                <%= flag.attack_period.round.finish %>
               </td>
               <td>
                 <%= flag.times_stolen %>

@@ -1,8 +1,8 @@
 class FlagSubmissionsController < ApplicationController
   before_filter :enforce_access
-
   def index
     # Shows flag submitted listing (which team, when, and success)
+    @flag_submissions = current_user.flag_submissions.order(submitted_at: :desc)
   end
 
   def show
@@ -10,25 +10,18 @@ class FlagSubmissionsController < ApplicationController
   end
 
   def create
+    #Ensure they are not capturing their own flag or the same team's flag multiple times
+
     # Used to submit a new flag
-    submitted_time = Time.now.to_i
-    defending_team = User.find(params[:team])
-    flag_find = defending_team.flags.find_by(flag: params[:flag]) if defending_team
-    time_range = nil
-    time_range = flag_find?.attack_period.start.to_i..flag?.attack_period.finish.to_i if flag_find
-    # need to add round, possibly automate check with before_create
-    new_fs = FlagSubmission.new(user: current_user, flag: params[:flag])
-    new_fs.owner = defending_team if defending_team
-    if(time_range === submitted_time)
-      # add the success factor here
-      new_fs[:success] = true
-      new_fs.save
-      @defending_team = defending_team
+    defending_team = User.find_by_id(params[:team])
+    defending_team = nil unless defending_team
+    if defending_team == current_user
+      @defending_team = "NICE TRY"
       @success = true
     else
-      new_fs[:success] = false
-      new_fs.save
-      @success = false
+      new_fs = FlagSubmission.create(user: current_user, flag: params[:flag], owner: defending_team)
+      @defending_team = new_fs.owner.display_name if new_fs.owner
+      @success = new_fs.success
     end
   end
 end

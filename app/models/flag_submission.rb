@@ -6,17 +6,14 @@ class FlagSubmission < ActiveRecord::Base
   # Should auto assign to specific AttackPeriod
   before_save do
     # Assign an attack period (if not already done)
-    submitted_time = Time.now
-    unless self.attack_period
-      self.attack_period = AttackPeriod.find_by('start < :submitted_time and :submitted_time < finish', {submitted_time: submitted_time})
-    end
+    self.submitted_at = Time.now unless self.submitted_at  
+    self.attack_period = AttackPeriod.find_by('start < :submitted_at and :submitted_at < finish', {submitted_at: self.submitted_at}) unless self.attack_period
     # Perform success check and apply
-    flag_find = self.owner.flags.find_by(flag: self.flag, attack_period: self.attack_period) if self.owner
-    # need to add round, possibly automate check with before_create
-    if flag_find
-      self.success = true
+    self.success = if self.owner and self.owner.flags.find_by(flag: self.flag, attack_period: self.attack_period)
+      true
     else
-      self.success = false
+      false
     end
+    true
   end
 end

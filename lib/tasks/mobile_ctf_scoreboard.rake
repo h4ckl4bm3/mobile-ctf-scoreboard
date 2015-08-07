@@ -48,7 +48,7 @@ namespace :mobile_ctf_scoreboard do
   task :load_flags_for_period, [:attack_start, :flag] => :environment do |t, args|
     # May want to prevent multiple flags from being loaded during the
     Player.find_each do |player|
-      flag = Flag.new(user: player, flag: "#{args[:flag]}")
+      flag = Flag.new(user: player, flag: args[:flag])
       if args[:attack_start]
         start = args[:attack_start].to_time
         # set attack_period to exist with attack_start args[:attack_start]
