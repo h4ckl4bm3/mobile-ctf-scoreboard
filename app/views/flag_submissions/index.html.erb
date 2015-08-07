@@ -1,2 +1,49 @@
-<h1>FlagSubmissions#index</h1>
-<p>Find me in app/views/flag_submissions/index.html.erb</p>
+<div class="row" >
+
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Flag Submission
+          </th>
+          <th>
+            Team Attacked
+          </th>
+          <th>
+            Submitted At
+          </th>
+          <th>
+            Success
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if !@flag_submissions.blank? %>
+          <% for submission in @flag_submissions%>
+            <tr>
+              <td>
+                <%= submission.flag %>
+              </td>
+              <td>
+                <%= if submission.owner then submission.owner.display_name end%>
+              </td>
+              <td>
+                <%= submission.submitted_at %>
+              </td>
+              <td>
+                <%= submission.success %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan=4>
+              <h1>No Flags to display</h1>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
