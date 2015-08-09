@@ -3,8 +3,8 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.string :title
       t.string :message
+      t.timestamp :sent_at
       t.timestamps null: false
-      t.references :user, index: true
     end
   end
 end
