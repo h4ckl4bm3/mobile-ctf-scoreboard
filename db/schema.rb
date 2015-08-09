@@ -76,8 +76,9 @@ ActiveRecord::Schema.define(version: 20150809145503) do
   add_index "integrities", ["user_id"], name: "index_integrities_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.string   "title"
+    t.string   "subject"
     t.string   "message"
+    t.string   "sent_to"
     t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

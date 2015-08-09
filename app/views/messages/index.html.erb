@@ -1,2 +1,53 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<div class="row" >
+
+  <div class="col-12">
+    <table class="table table-striped table-hover">
+      <thead>
+        <caption>Messages (in order of creation)</caption>
+        <tr>
+          <th>
+            Sent To
+          </th>
+          <th>
+            Subject
+          </th>
+          <th>
+            Time
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if !@messages.blank? %>
+          <% for message in @messages%>
+            <tr class='clickable-row' data-href='<%= message_path(message.id) %>'>
+              <td>
+                <!-- Should be User or All -->
+                <%= message.sent_to %>
+              </td>
+              <td>
+                <!-- May want to add message body (shortened) here -->
+                <%= message.subject %>
+              </td>
+              <td>
+                <%= message.sent_at %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan=3>
+              <h1>No Messages to display</h1>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  $(function() {
+    $(".clickable-row").click(function() {
+      window.document.location = $(this).data("href");
+    });
+  });
+</script>

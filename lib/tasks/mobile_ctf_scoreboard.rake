@@ -70,7 +70,7 @@ namespace :mobile_ctf_scoreboard do
       desc 'Send message to a user'
       task :to_user, [:user_id, :subject, :message, :sent_at] => [:environment] do |t, args|
         sent_at = args[:sent_at].to_time if args[:sent_at]
-        message = Message.create!(title: args[:subject], message: args[:message], sent_at: sent_at)
+        message = Message.create!(subject: args[:subject], message: args[:message], sent_at: sent_at, sent_to: 'User')
         user = User.find_by_id(args[:user_id])
         UserMessage.create!(user: user, message: message)
       end
@@ -78,7 +78,7 @@ namespace :mobile_ctf_scoreboard do
       desc 'Send message to all users'
       task :to_all, [:subject, :message, :sent_at] => [:environment] do |t, args|
         sent_at = args[:sent_at].to_time if args[:sent_at]
-        message = Message.create!(title: args[:subject], message: args[:message], sent_at: sent_at)
+        message = Message.create!(subject: args[:subject], message: args[:message], sent_at: sent_at, sent_to: 'All')
         Player.find_each do |player|
           UserMessage.create!(user: player, message: message)
         end

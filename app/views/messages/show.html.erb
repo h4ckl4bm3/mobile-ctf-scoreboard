@@ -1,2 +1,7 @@
-<h1>Messages#show</h1>
-<p>Find me in app/views/messages/show.html.erb</p>
+<% if @message %>
+  <h1><%= @message.subject %></h1>
+
+  <p><%= @message.message %></p>
+<% else %>
+  <h1>Message not found</h1>
+<% end %>
