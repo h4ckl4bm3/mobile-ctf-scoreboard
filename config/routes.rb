@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
   resources :teams, controller: 'users',  only: [:index, :show]
-  
+
   # devise
   devise_for :users
   devise_scope :user do
     get 'signin', :to => 'devise/sessions#new'
     get 'signout', :to => 'devise/sessions#destroy'
   end
-  
+
   get '/' => 'users#index'
 
-  resources :integrities, only: [:index, :show]
-  resources :flag_submissions, only: [:index, :show, :create]
-  resources :flags, only: [:index, :show]
+  resources :integrities, only: [:index]
+  resources :flag_submissions, only: [:index, :create]
+  resources :flags, only: [:index]
   resources :messages, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.

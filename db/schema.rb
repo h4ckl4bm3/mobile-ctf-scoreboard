@@ -64,9 +64,10 @@ ActiveRecord::Schema.define(version: 20150724011524) do
 
   create_table "integrities", force: :cascade do |t|
     t.boolean  "success"
+    t.datetime "submitted_at"
     t.string   "method"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.integer  "round_id"
   end

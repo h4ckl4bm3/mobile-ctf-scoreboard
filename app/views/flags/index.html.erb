@@ -2,6 +2,7 @@
 
   <div class="col-12">
     <table class="table table-striped">
+      <caption>Flags (in order of creation)</caption>
       <thead>
         <tr>
           <th>
@@ -26,23 +27,23 @@
                 <%= flag.flag %>
               </td>
               <td>
-                <div class="text-center">
-                  from
-                </div>
+                <strong>
+                  from:
+                </strong>
                 <%= flag.attack_period.start %><br/>
-                <div class="text-center">
-                  to
-                </div>
+                <strong>
+                  to: &nbsp;&nbsp;&nbsp;&nbsp;
+                </strong>
                 <%= flag.attack_period.finish %>
               </td>
               <td>
-                <div class="text-center">
-                  from
-                </div>
+                <strong>
+                  from:
+                </strong>
                 <%= flag.attack_period.round.start %><br/>
-                <div class="text-center">
-                  to
-                </div>
+                <strong>
+                  to: &nbsp;&nbsp;&nbsp;&nbsp;
+                </strong>
                 <%= flag.attack_period.round.finish %>
               </td>
               <td>
