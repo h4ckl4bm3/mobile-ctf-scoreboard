@@ -3,10 +3,7 @@ class FlagSubmissionsController < ApplicationController
   def index
     # Shows flag submitted listing (which team, when, and success)
     @flag_submissions = current_user.flag_submissions.order(submitted_at: :desc)
-  end
-
-  def show
-    # Shows flag submission (which team, when, what flag was tried, and success)
+    @title = "Flag Submissions"
   end
 
   def create

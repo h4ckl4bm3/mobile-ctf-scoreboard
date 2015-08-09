@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def index
     @teams = Player.all
+    @title = "Teams"
   end
 
   def show
