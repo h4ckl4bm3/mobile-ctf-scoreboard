@@ -58,6 +58,13 @@ namespace :mobile_ctf_scoreboard do
     end
   end
 
+  desc "Load integrity check result"
+  task :load_integrity_check_result, [:user, :success, :time] => :environment do |t, args|
+    generated_at = args[:time].to_time if args[:time]
+    user = User.find_by_id(args[:user])
+    Integrity.create!(user: user, success: args[:success], submitted_at: generated_at)
+  end
+
   desc "Load test flag submissions"
   task :load_test_flag_submissions_for_period, [:user, :owner, :success, :attack_start] => :environment do |t, args|
     # May want to prevent multiple flags from being loaded during the

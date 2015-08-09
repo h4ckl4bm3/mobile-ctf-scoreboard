@@ -29,3 +29,12 @@ rake mobile_ctf_scoreboard:load_flags_for_period\[00:33:00\]
 rake mobile_ctf_scoreboard:load_flags_for_period\[01:25:00\]
 rake mobile_ctf_scoreboard:load_flags_for_period\[02:13:00\]
 rake mobile_ctf_scoreboard:load_flags_for_period\[02:48:00\]
+
+# Create the integrity check results
+rake mobile_ctf_scoreboard:load_integrity_check_result\[1,true,02:06:00\]
+rake mobile_ctf_scoreboard:load_integrity_check_result\[2,true,02:06:00\]
+rake mobile_ctf_scoreboard:load_integrity_check_result\[3,true,02:06:00\]
+rake mobile_ctf_scoreboard:load_integrity_check_result\[4,true,02:06:00\]
+rake mobile_ctf_scoreboard:load_integrity_check_result\[5,true,02:06:00\]
+rake mobile_ctf_scoreboard:load_integrity_check_result\[1,false,00:26:00\]
+rake mobile_ctf_scoreboard:load_integrity_check_result\[1,false,02:40:00\]
