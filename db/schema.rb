@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809145503) do
+ActiveRecord::Schema.define(version: 20150811224308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150809145503) do
   end
 
   add_index "flag_submissions", ["attack_period_id"], name: "index_flag_submissions_on_attack_period_id", using: :btree
+  add_index "flag_submissions", ["flag"], name: "index_flag_submissions_on_flag", using: :btree
   add_index "flag_submissions", ["owner_id"], name: "index_flag_submissions_on_owner_id", using: :btree
   add_index "flag_submissions", ["user_id"], name: "index_flag_submissions_on_user_id", using: :btree
 
@@ -57,9 +58,11 @@ ActiveRecord::Schema.define(version: 20150809145503) do
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
     t.integer  "attack_period_id"
+    t.integer  "point_value"
   end
 
   add_index "flags", ["attack_period_id"], name: "index_flags_on_attack_period_id", using: :btree
+  add_index "flags", ["flag"], name: "index_flags_on_flag", using: :btree
   add_index "flags", ["user_id"], name: "index_flags_on_user_id", using: :btree
 
   create_table "integrities", force: :cascade do |t|

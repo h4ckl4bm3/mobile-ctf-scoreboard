@@ -17,6 +17,12 @@
           <th>
             Times Stolen
           </th>
+          <th>
+            Point Value
+          </th>
+          <th>
+            Point Value (Current)
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -60,6 +66,12 @@
               </td>
               <td>
                 <%= flag.times_stolen %>
+              </td>
+              <td>
+                <%= flag.point_value %>
+              </td>
+              <td>
+                <%= flag.point_value - flag.times_stolen %>
               </td>
             </tr>
           <% end %>

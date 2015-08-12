@@ -46,10 +46,10 @@ namespace :mobile_ctf_scoreboard do
     end
 
     desc "Load flags for all users in DB, attack_start defaults to now"
-    task :flags_for_period, [:attack_start, :flag] => :environment do |t, args|
+    task :flags_for_period, [:points, :attack_start, :flag] => :environment do |t, args|
       # May want to prevent multiple flags from being loaded during the
       Player.find_each do |player|
-        flag = Flag.new(user: player, flag: args[:flag])
+        flag = Flag.new(user: player, flag: args[:flag], point_value: args[:points])
         if args[:attack_start]
           start = args[:attack_start].to_time
           # set attack_period to exist with attack_start args[:attack_start]

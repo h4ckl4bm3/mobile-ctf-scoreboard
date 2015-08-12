@@ -25,10 +25,10 @@ rake mobile_ctf_scoreboard:load:attack_period\[15,4,02:08:00\]
 rake mobile_ctf_scoreboard:load:attack_period\[15,4,02:43:00\]
 
 # Create a new flag for each Attack Round
-rake mobile_ctf_scoreboard:load:flags_for_period\[00:33:00\]
-rake mobile_ctf_scoreboard:load:flags_for_period\[01:25:00\]
-rake mobile_ctf_scoreboard:load:flags_for_period\[02:13:00\]
-rake mobile_ctf_scoreboard:load:flags_for_period\[02:48:00\]
+rake mobile_ctf_scoreboard:load:flags_for_period\[15,00:33:00\]
+rake mobile_ctf_scoreboard:load:flags_for_period\[15,01:25:00\]
+rake mobile_ctf_scoreboard:load:flags_for_period\[30,02:13:00\]
+rake mobile_ctf_scoreboard:load:flags_for_period\[30,02:48:00\]
 
 # Create the integrity check results
 rake mobile_ctf_scoreboard:load:integrity_check_result\[1,true,02:06:00\]
