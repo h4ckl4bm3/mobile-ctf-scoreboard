@@ -17,6 +17,12 @@
           <th>
             Times Stolen
           </th>
+          <th>
+            Point Value
+          </th>
+          <th>
+            Point Value (Current)
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -27,27 +33,57 @@
                 <%= flag.flag %>
               </td>
               <td>
-                <strong>
-                  from:
-                </strong>
-                <%= flag.attack_period.start %><br/>
-                <strong>
-                  to: &nbsp;&nbsp;&nbsp;&nbsp;
-                </strong>
-                <%= flag.attack_period.finish %>
+                <% if flag.attack_period %>
+                  <strong>
+                    from:
+                  </strong>
+                  <%= flag.attack_period.start %><br/>
+                  <strong>
+                    to: &nbsp;&nbsp;&nbsp;&nbsp;
+                  </strong>
+                  <%= flag.attack_period.finish %>
+                <% else %>
+                  <strong>
+                    Not Found
+                  </strong>
+                <% end %>
               </td>
               <td>
-                <strong>
-                  from:
-                </strong>
-                <%= flag.attack_period.round.start %><br/>
-                <strong>
-                  to: &nbsp;&nbsp;&nbsp;&nbsp;
-                </strong>
-                <%= flag.attack_period.round.finish %>
+                <% if flag.attack_period and flag.attack_period.round %>
+                  <strong>
+                    from:
+                  </strong>
+                  <%= flag.attack_period.round.start %><br/>
+                  <strong>
+                    to: &nbsp;&nbsp;&nbsp;&nbsp;
+                  </strong>
+                  <%= flag.attack_period.round.finish %>
+                <% else %>
+                  <strong>
+                    Not Found
+                  </strong>
+                <% end %>
               </td>
               <td>
                 <%= flag.times_stolen %>
+              </td>
+              <td>
+                <% if flag.attack_period and flag.attack_period.flag_point_value %>
+                  <%= flag.attack_period.flag_point_value %>
+                <% else %>
+                  <strong>
+                    No Attack Period Found
+                  </strong>
+                <% end %>
+              </td>
+              <td>
+                <% if flag.attack_period and flag.attack_period.flag_point_value %>
+                  <%= flag.attack_period.flag_point_value - flag.times_stolen*(flag.attack_period.flag_point_value/Player.all.count) %>
+                <% else %>
+                  <strong>
+                    No Attack Period Found
+                  </strong>
+                <% end %>
               </td>
             </tr>
           <% end %>

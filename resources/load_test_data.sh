@@ -8,9 +8,10 @@ rake mobile_ctf_scoreboard:load:player\[tests@example.com,test1234,tester3\] RAI
 rake mobile_ctf_scoreboard:load:player\[testing2@example.com,test1234,tester4\] RAILS_ENV=development
 
 # Create Rounds (2 with one attack/defend, 1 with 2)
-rake mobile_ctf_scoreboard:load:round\[00:12:00,00:47:00\]
-rake mobile_ctf_scoreboard:load:round\[01:02:00,01:37:00\]
-rake mobile_ctf_scoreboard:load:round\[01:52:00,03:02:00\]
+rake mobile_ctf_scoreboard:load:round\[10,00:12:00,00:47:00\]
+rake mobile_ctf_scoreboard:load:round\[10,01:02:00,01:37:00\]
+rake mobile_ctf_scoreboard:load:round\[20,01:52:00,03:02:00\]
+rake mobile_ctf_scoreboard:load:round\[30\]
 
 # Create Defend Periods
 rake mobile_ctf_scoreboard:load:defend_period\[15,1,00:12:00\]
@@ -19,16 +20,18 @@ rake mobile_ctf_scoreboard:load:defend_period\[15,1,01:52:00\]
 rake mobile_ctf_scoreboard:load:defend_period\[15,1,02:27:00\]
 
 # Create Attack Periods
-rake mobile_ctf_scoreboard:load:attack_period\[15,4,00:28:00\]
-rake mobile_ctf_scoreboard:load:attack_period\[15,4,01:18:00\]
-rake mobile_ctf_scoreboard:load:attack_period\[15,4,02:08:00\]
-rake mobile_ctf_scoreboard:load:attack_period\[15,4,02:43:00\]
+rake mobile_ctf_scoreboard:load:attack_period\[10,1.2,15,4,00:28:00\]
+rake mobile_ctf_scoreboard:load:attack_period\[10,1.2,15,4,01:18:00\]
+rake mobile_ctf_scoreboard:load:attack_period\[20,1.5,15,4,02:08:00\]
+rake mobile_ctf_scoreboard:load:attack_period\[20,1.4,15,4,02:43:00\]
+rake mobile_ctf_scoreboard:load:attack_period\[30,1.8,200\]
 
 # Create a new flag for each Attack Round
 rake mobile_ctf_scoreboard:load:flags_for_period\[00:33:00\]
 rake mobile_ctf_scoreboard:load:flags_for_period\[01:25:00\]
 rake mobile_ctf_scoreboard:load:flags_for_period\[02:13:00\]
 rake mobile_ctf_scoreboard:load:flags_for_period\[02:48:00\]
+rake mobile_ctf_scoreboard:load:flags_for_period\[\]
 
 # Create the integrity check results
 rake mobile_ctf_scoreboard:load:integrity_check_result\[1,true,02:06:00\]
