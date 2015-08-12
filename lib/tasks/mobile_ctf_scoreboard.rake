@@ -86,12 +86,29 @@ namespace :mobile_ctf_scoreboard do
     end
   end
   namespace :test do
-    desc "Load test flag submissions"
-    task :flag_submissions_for_period, [:user_id, :owner, :success, :attack_start] => :environment do |t, args|
+    desc "Load successful test flag submissions"
+    task :successful_flag_submissions_for_period, [:user_id, :owner_id, :attack_start] => :environment do |t, args|
       # May want to prevent multiple flags from being loaded during the
       user = User.find_by_id(args[:user_id])
-      flag_submission = FlagSubmission.new()
+      owner = User.find_by_id(args[:owner_id])
+      submitted_at = Time.now
+      submitted_at = args[:attack_start].to_time if args[:attack_start]
+      attack_period = AttackPeriod.find_by('start < :submitted_at and :submitted_at < finish', {submitted_at: submitted_at})
+      flag_obj = owner.flags.find_by(attack_period: attack_period)
+      flag = flag_obj.flag if flag_obj
+      flag_submission = FlagSubmission.create(user: user, owner: owner, submitted_at: submitted_at, attack_period: attack_period, flag: flag)
     end
+      desc "Load failing flag submissions"
+      task :failing_flag_submissions_for_period, [:user_id, :owner_id, :attack_start] => :environment do |t, args|
+        # May want to prevent multiple flags from being loaded during the
+        user = User.find_by_id(args[:user_id])
+        owner = User.find_by_id(args[:owner_id])
+        submitted_at = Time.now
+        submitted_at = args[:attack_start].to_time if args[:attack_start]
+        attack_period = AttackPeriod.find_by('start < :submitted_at and :submitted_at < finish', {submitted_at: submitted_at})
+        flag = "Guess this was meant to fail"
+        flag_submission = FlagSubmission.create!(user: user, owner: owner, submitted_at: submitted_at, attack_period: attack_period, flag: flag)
+      end
   end
 
 end
