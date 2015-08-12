@@ -68,10 +68,22 @@
                 <%= flag.times_stolen %>
               </td>
               <td>
-                <%= flag.point_value %>
+                <% if flag.attack_period and flag.attack_period.flag_point_value %>
+                  <%= flag.attack_period.flag_point_value %>
+                <% else %>
+                  <strong>
+                    No Attack Period Found
+                  </strong>
+                <% end %>
               </td>
               <td>
-                <%= flag.point_value - flag.times_stolen %>
+                <% if flag.attack_period and flag.attack_period.flag_point_value %>
+                  <%= flag.attack_period.flag_point_value - flag.times_stolen*(flag.attack_period.flag_point_value/Player.all.count) %>
+                <% else %>
+                  <strong>
+                    No Attack Period Found
+                  </strong>
+                <% end %>
               </td>
             </tr>
           <% end %>

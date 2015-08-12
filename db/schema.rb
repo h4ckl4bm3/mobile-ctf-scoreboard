@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811224308) do
+ActiveRecord::Schema.define(version: 20150812142142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 20150811224308) do
     t.datetime "start"
     t.datetime "finish"
     t.integer  "round_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "flag_point_value"
+    t.decimal  "submission_point_multiplier"
   end
 
   add_index "attack_periods", ["round_id"], name: "index_attack_periods_on_round_id", using: :btree
@@ -58,7 +60,6 @@ ActiveRecord::Schema.define(version: 20150811224308) do
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
     t.integer  "attack_period_id"
-    t.integer  "point_value"
   end
 
   add_index "flags", ["attack_period_id"], name: "index_flags_on_attack_period_id", using: :btree
@@ -90,8 +91,9 @@ ActiveRecord::Schema.define(version: 20150811224308) do
   create_table "rounds", force: :cascade do |t|
     t.datetime "start"
     t.datetime "finish"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "integrity_point_value"
   end
 
   create_table "user_messages", force: :cascade do |t|

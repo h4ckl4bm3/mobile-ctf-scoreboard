@@ -16,9 +16,9 @@ namespace :mobile_ctf_scoreboard do
 
     desc "Create new round (end is indeterminate, only until we say it ends), start defaults to now"
     # Honestly, we may want to setup all rounds at the beginning (though this may be difficult with integrity checks)
-    task :round, [:start, :finish] => :environment do |t, args|
+    task :round, [:integrity_point_value, :start, :finish] => :environment do |t, args|
       start = if args[:start] then args[:start].to_time else Time.now end
-      round = Round.new(start: start)
+      round = Round.new(start: start, integrity_point_value: args[:integrity_point_value])
       if args[:finish]
         round[:finish] = args[:finish].to_time
       end
@@ -37,19 +37,19 @@ namespace :mobile_ctf_scoreboard do
 
     # Was thinking we may need defend, but that may not be necessary (it's just when attack doesn't exist)
     desc "Create new attack period, offset moves start time up, start defaults now, offset defaults 0, duration defaults 15"
-    task :attack_period, [:duration_in_minutes, :offset_in_minutes, :start] => :environment do |t, args|
+    task :attack_period, [:flag_points, :submission_point_multiplier, :duration_in_minutes, :offset_in_minutes, :start] => :environment do |t, args|
       start = if args[:start] then args[:start].to_time else Time.now end
       offset = if args[:offset_in_minutes] then args[:offset_in_minutes].to_i else 0 end
       duration = if args[:duration_in_minutes] then args[:duration_in_minutes].to_i else 15 end
       actualStart = start + offset*60
-      AttackPeriod.create!(start: actualStart, finish: actualStart + duration*60)
+      AttackPeriod.create!(start: actualStart, finish: actualStart + duration*60, flag_point_value: args[:flag_points], submission_point_multiplier: args[:submission_point_multiplier])
     end
 
     desc "Load flags for all users in DB, attack_start defaults to now"
-    task :flags_for_period, [:points, :attack_start, :flag] => :environment do |t, args|
+    task :flags_for_period, [:attack_start, :flag] => :environment do |t, args|
       # May want to prevent multiple flags from being loaded during the
       Player.find_each do |player|
-        flag = Flag.new(user: player, flag: args[:flag], point_value: args[:points])
+        flag = Flag.new(user: player, flag: args[:flag])
         if args[:attack_start]
           start = args[:attack_start].to_time
           # set attack_period to exist with attack_start args[:attack_start]
