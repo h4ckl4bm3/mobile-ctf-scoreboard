@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :teams, controller: 'users',  only: [:index, :show]
+  resources :teams, controller: 'users',  only: [:index]
   get 'myteam', :to => 'users#myteam'
   # devise
   devise_for :users
