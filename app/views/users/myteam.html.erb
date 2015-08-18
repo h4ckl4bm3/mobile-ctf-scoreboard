@@ -1,0 +1,75 @@
+
+<div class="row" >
+
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+
+          </th>
+          <th>
+            Round
+          </th>
+          <th>
+            Total
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if !@player.blank? %>
+          <tr>
+            <th>
+              Integrity Check Failures
+            </th>
+            <td>
+              <%= @failed_integrities_for_round %>
+            </td>
+            <td>
+              <%= @failed_integrities %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Flag Submissions (success)
+            </th>
+            <td>
+              <%= @flag_submissions_for_round %> ( <strong><%= @flag_submissions_success_for_round %></strong> )
+            </td>
+            <td>
+              <%= @flag_submissions %> ( <strong><%= @flag_submissions_success %></strong> )
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Number of times flag stolen (success)
+            </th>
+            <td>
+              <%= @flag_steal_attempts_for_round %> ( <strong><%= @flag_steal_successes_for_round %></strong> )
+            </td>
+            <td>
+              <%= @flag_steal_attempts %> ( <strong><%= @flag_steal_successes %></strong> )
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Points
+            </th>
+            <td>
+              <%= @score_for_round %>
+            </td>
+            <td>
+              <%= @score %>
+            </td>
+          </tr>
+        <% else %>
+          <tr>
+            <td colspan=4>
+              <h1>No info to display</h1>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
