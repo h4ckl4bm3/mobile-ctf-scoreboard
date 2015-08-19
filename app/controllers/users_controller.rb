@@ -16,10 +16,10 @@ class UsersController < ApplicationController
     @flag_submissions = current_user.flag_submissions.all.count
     @flag_submissions_success = current_user.flag_submissions.where(success: true).count
 
-    @flag_steal_attempts_for_round = current_user.flags.joins('LEFT OUTER JOIN flag_submissions ON flags.attack_period_id = flag_submissions.attack_period_id').joins(:attack_period).where('attack_periods.round_id' => round).count if round
-    @flag_steal_successes_for_round = current_user.flags.joins('LEFT OUTER JOIN flag_submissions ON flags.attack_period_id = flag_submissions.attack_period_id AND flags.flag = flag_submissions.flag').joins(:attack_period).where('attack_periods.round_id' => round).count if round
-    @flag_steal_attempts = current_user.flags.joins('LEFT OUTER JOIN flag_submissions ON flags.attack_period_id = flag_submissions.attack_period_id').count
-    @flag_steal_successes = current_user.flags.joins('LEFT OUTER JOIN flag_submissions ON flags.attack_period_id = flag_submissions.attack_period_id AND flags.flag = flag_submissions.flag').count
+    @flag_steal_attempts_for_round = FlagSubmission.where(owner: current_user).joins(:attack_period).where('attack_periods.round_id' => round).count if round
+    @flag_steal_successes_for_round = FlagSubmission.where(owner: current_user, success: true).joins(:attack_period).where('attack_periods.round_id' => round).count if round
+    @flag_steal_attempts = FlagSubmission.where(owner: current_user).count
+    @flag_steal_successes = FlagSubmission.where(owner: current_user, success: true).count
     # @flags_submitted = to_timeline FlagSubmission.where("user_id=?",params[:id]).group_by {|sf| sf.updated_at.change(:sec=>0)}
     @score_for_round = @player.score_for_round
     @score = @player.score
