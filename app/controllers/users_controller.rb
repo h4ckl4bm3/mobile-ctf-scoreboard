@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :enforce_access, only: [ :myteam ]
+  before_filter :enforce_access, only: [ :myteam, :upload_package ]
   def index
     @teams = Player.all
     @title = "Teams"
@@ -26,5 +26,18 @@ class UsersController < ApplicationController
     @title = @player.display_name
 
     render :myteam
+  end
+
+  def upload_package
+    defense_period = DefendPeriod.find_by('start <= :current_time and (finish is null or :current_time <= finish)', {current_time: Time.now})
+    # Exit if not currently a defense period.  Should send error back when none found
+    return unless defense_period
+    file_name = current_user.id.to_s + '.zip'
+    dir = File.dirname("#{Rails.root}/packages/#{defense_period.id}/my.log")
+    FileUtils.mkdir_p(dir) unless File.directory?(dir)
+    File.open(Rails.root.join('packages', defense_period.id.to_s, file_name), 'wb') do |file|
+      file.write(params[:app].read)
+    end
+    render :index
   end
 end
