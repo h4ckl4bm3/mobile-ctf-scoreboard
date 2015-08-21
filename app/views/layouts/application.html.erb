@@ -84,11 +84,29 @@
     </div>
     <%= yield %>
   </div>
-
-  <div class="container">
-    <p style="text-align:center;margin-top:40px;">
-      MITRE Cyber Academy&trade;
-    </p>
-  </div>
+  <footer class="footer">
+    <div class="container">
+      <%= render partial: "layouts/countdown" %>
+    </div>
+    <div class="container">
+      <p class="text-muted" style="text-align:center;margin-top:40px;">
+        MITRE Cyber Academy&trade; / The MITRE Corporation
+      </p>
+    </div>
+  </footer>
+  <% if @period %>
+    <script type="text/javascript">
+      $(function(){
+        startTimer(@period.finish);
+      });
+    </script>
+  <% else %>
+    <script type="text/javascript">
+      // create some message to indicate no games are currently running
+      $(function(){
+        $('#clock_text').text('No current period');
+      });
+    </script>
+  <% end %>
 </body>
 </html>
