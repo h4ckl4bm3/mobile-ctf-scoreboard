@@ -84,11 +84,23 @@
     </div>
     <%= yield %>
   </div>
-
-  <div class="container">
-    <p style="text-align:center;margin-top:40px;">
-      MITRE Cyber Academy&trade;
-    </p>
-  </div>
+  <footer class="footer">
+    <div class="container">
+      <%= render partial: "layouts/countdown", locals: {countdown_to_start: @countdown_to_start, countdown_to_end: @countdown_to_end}  %>
+    </div>
+    <div class="container">
+      <p class="text-muted" style="text-align:center;margin-top:40px;">
+        MITRE Cyber Academy&trade; / The MITRE Corporation
+      </p>
+    </div>
+  </footer>
+  <script type="text/javascript">
+    <% if @countdown_to_end %>
+      window.endTime = new Date("<%=@countdown_to_end.finish%>");
+    <% elsif @countdown_to_start %>
+      window.endTime = new Date("<%=@countdown_to_start.start%>");
+    <% else %>
+    <% end %>
+  </script>
 </body>
 </html>

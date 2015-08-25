@@ -1,0 +1,15 @@
+<div id="clock" class="clock pull-right">
+	<h4 id="timeless_text" style="display:<%= if countdown_to_start or countdown_to_end then "none" else "block" end%>;">
+		No periods currently scheduled
+	</h4>
+	<h4 id="clock_text" style="display:<%= if countdown_to_start or countdown_to_end then "block" else "none" end%>;">
+		<% if countdown_to_end %>
+			<span id="time_text"> Time Remaining in <%= if countdown_to_end.is_a?(AttackPeriod) then "Attack Period" else "Defend Period" end %>= </span>
+		<% else %>
+			<span id="time_text"> Time Until <%= if countdown_to_start.is_a?(AttackPeriod) then "Attack Period" else "Defend Period" end %> Begins= </span>
+		<% end %>
+		<span id="hours" class="hours"></span>
+		<span id="minutes" class="minutes"></span>
+		<small id="seconds" class="seconds"></small>
+  </h4>
+</div>
