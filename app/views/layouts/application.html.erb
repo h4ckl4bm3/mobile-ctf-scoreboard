@@ -86,7 +86,7 @@
   </div>
   <footer class="footer">
     <div class="container">
-      <%= render partial: "layouts/countdown" %>
+      <%= render partial: "layouts/countdown", locals: {countdown_to_start: @countdown_to_start, countdown_to_end: @countdown_to_end}  %>
     </div>
     <div class="container">
       <p class="text-muted" style="text-align:center;margin-top:40px;">
@@ -94,19 +94,13 @@
       </p>
     </div>
   </footer>
-  <% if @period %>
-    <script type="text/javascript">
-      $(function(){
-        startTimer(@period.finish);
-      });
-    </script>
-  <% else %>
-    <script type="text/javascript">
-      // create some message to indicate no games are currently running
-      $(function(){
-        $('#clock_text').text('No current period');
-      });
-    </script>
-  <% end %>
+  <script type="text/javascript">
+    <% if @countdown_to_end %>
+      window.endTime = new Date("<%=@countdown_to_end.finish%>");
+    <% elsif @countdown_to_start %>
+      window.endTime = new Date("<%=@countdown_to_start.start%>");
+    <% else %>
+    <% end %>
+  </script>
 </body>
 </html>
