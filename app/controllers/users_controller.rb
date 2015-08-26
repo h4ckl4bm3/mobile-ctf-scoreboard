@@ -34,13 +34,14 @@ class UsersController < ApplicationController
     @title = "Failure!"
     @error_messages = []
     @error_messages << "The defense period is over/not currently running" unless defense_period
-    @error_messages << "The defense period is over/not currently running" unless File.extname(params[:app].original_filename) == ".zip"
+    @error_messages << "Improper file type (should be .zip)" unless File.extname(params[:app].original_filename) == ".zip"
     return if @error_messages.length > 0
     @title = "Success!"
     file_name = current_user.id.to_s + '.zip'
-    dir = File.dirname("#{Rails.root}/packages/#{defense_period.id}/my.log")
-    FileUtils.mkdir_p(dir) unless File.directory?(dir)
-    File.open(Rails.root.join('packages', defense_period.id.to_s, file_name), 'wb') do |file|
+    directory = File.expand_path("~/ctf/packages/#{defense_period.id}/")
+    file_path = File.join(directory, file_name)
+    FileUtils.mkdir_p(directory) unless File.directory?(directory)
+    File.open(file_path, 'wb') do |file|
       file.write(params[:app].read)
     end
   end
