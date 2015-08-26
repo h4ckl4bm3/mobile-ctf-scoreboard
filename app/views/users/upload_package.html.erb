@@ -1,0 +1,16 @@
+<% if @error_messages.length > 0 %>
+  <div class="row" >
+    <div class="col-12">
+      <h2> Upload failed for these reasons: </h2>
+      <% for error in @error_messages %>
+        <h3> <%= error %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="row" >
+    <div class="col-12">
+      <h2> The file has successfully been uploaded! </h2>
+    </div>
+  </div>
+<% end %>
