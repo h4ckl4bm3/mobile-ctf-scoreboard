@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     return if @error_messages.length > 0
     @title = "Success!"
     file_name = current_user.id.to_s + '.zip'
-    directory = File.expand_path("~/ctf/packages/#{defense_period.id}/")
+    directory = "/opt/packages/#{defense_period.id}"
     file_path = File.join(directory, file_name)
     FileUtils.mkdir_p(directory) unless File.directory?(directory)
     File.open(file_path, 'wb') do |file|
