@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :teams, controller: 'users',  only: [:index]
   get 'myteam', :to => 'users#myteam'
+  post 'uploadpackage', :to => 'users#upload_package'
+
   # devise
   devise_for :users
   devise_scope :user do
