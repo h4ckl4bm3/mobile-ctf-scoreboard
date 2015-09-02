@@ -85,6 +85,17 @@ namespace :mobile_ctf_scoreboard do
       end
     end
   end
+  namespace :update do
+    desc "Modify current round to give it an end"
+    # Honestly, we may want to setup all rounds at the beginning (though this may be difficult with integrity checks)
+    task :end_round, [:finish] => :environment do |t, args|
+      round = Round.find_by('start <= :current and (:current <= finish or finish is null)', {current: Time.now})
+      if round
+        round[:finish] = if args[:finish] then args[:finish].to_time else Time.now end
+      end
+      round.save!
+    end
+  end
   namespace :test do
     desc "Load successful test flag submissions"
     task :successful_flag_submissions_for_period, [:user_id, :owner_id, :attack_start] => :environment do |t, args|
