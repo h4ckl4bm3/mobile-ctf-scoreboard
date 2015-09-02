@@ -78,7 +78,7 @@
         * TBD
         * Will use Integrity 
     * ##### Integrity
-        * rake mobile_ctf_scoreboard:load:integrity_check_result[user_id,success,submitted_at]
+        * `rake mobile_ctf_scoreboard:load:integrity_check_result[user_id,success,submitted_at]`
             * user_id is the id of the team this check is submitted for
             * success is the boolean for whether or not the test was successful
             * submitted_at was the time that this tests submitted
