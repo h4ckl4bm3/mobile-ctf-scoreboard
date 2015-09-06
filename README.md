@@ -14,7 +14,8 @@
 
 * Must be executed from the rails app folder (/opt/mobile-scoreboard/current)
 * To view all available rake tasks, run `rake -T`
-* Most fields are optional and can be excluded (usually the railing ones)
+  * On the server set the environment to production (place `RAILS_ENV=production` at the end of each rake call)
+* Most fields are optional and can be excluded (usually the trailing ones)
 #### Basics
 ##### Round management
 * Creation
@@ -72,7 +73,7 @@
         * defaults to now
 #### Moderate
 ##### Signing/build apps
-        * TBD
+* TBD
 #### Advanced
 ##### Testing
 * TBD
