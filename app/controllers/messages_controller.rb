@@ -10,6 +10,10 @@ class MessagesController < ApplicationController
   def show
     # Lists message info
     @message = current_user.messages.find_by_id(params[:id])
+    if @message
+      @message.read = true
+      @message.save
+    end
     @title = "Full Message"
   end
 end
