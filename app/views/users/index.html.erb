@@ -16,6 +16,11 @@
           <th>
             Points This Round
           </th>
+          <% if current_user %>
+            <th>
+              Link To Current/Last Challenge Submission
+            </th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +38,15 @@
             <td>
               <%= current_user.score_for_round %>
             </td>
+            <% if current_user and @last_defense_period %>
+              <td>
+                <% if @last_defense_period %>
+                  <%= link_to "app.zip", "/#{@last_defense_period.id}/#{current_user.id}.zip" %>
+                <% else %>
+                  No prior defense periods on record
+                <% end %>
+              </td>
+            <% end %>
           </tr>
         <% end %>
         <% if !@teams.blank? %>
@@ -51,6 +65,15 @@
                 <td>
                   <%= team.score_for_round %>
                 </td>
+                <% if current_user %>
+                  <td>
+                    <% if @last_defense_period %>
+                      <%= link_to "app.zip", "/#{@last_defense_period.id}/#{team.id}.zip" %>
+                    <% else %>
+                      No prior defense periods on record
+                    <% end %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           <% end %>
@@ -64,4 +87,12 @@
       </tbody>
     </table>
   </div>
+  <% if current_user %>
+    <div class="col -12">
+      <strong>
+        Please refresh this screen at the beginning of an Attack Period to view the latest links to
+        players challenges.
+      </strong>
+    </div>
+  <% end %>
 </div>

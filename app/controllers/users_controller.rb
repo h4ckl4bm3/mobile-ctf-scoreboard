@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_filter :enforce_access, only: [ :myteam, :upload_package ]
   def index
-    @teams = Player.all
+    @teams = Player.all.order(:id)
+    @last_defense_period = DefendPeriod.where('finish <= :current_time', {current_time: Time.now}).order(finish: :desc).first
     @title = "Teams"
   end
 
