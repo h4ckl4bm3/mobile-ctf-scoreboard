@@ -96,6 +96,63 @@ namespace :mobile_ctf_scoreboard do
       round.save!
     end
   end
+  namespace :manage do
+    desc "Test each apps integrity"
+    task :integrity_test => :environment do |t, args|
+      defense_period = DefendPeriod.where('finish <= :current_time', {current_time: Time.now}).order(finish: :desc).first
+      storage_base = "/opt/packages/#{defense_period.id}"
+      Player.find_each do |player|
+        # Get the most recent defend period id
+        file_path = storage_base + "/#{player.id}"
+        File.open(file_path, 'rb') do |file|
+          # run command to unzip and test the apk
+
+          # either the command or the result will apply to the integrity
+        end if File.exists?(file_path)
+      end
+    end
+    desc "Place apps in a public directory"
+    task :make_challenges_public => :environment do |t, args|
+      defense_period = DefendPeriod.where('finish <= :current_time', {current_time: Time.now}).order(finish: :desc).first
+      storage_base = "/opt/packages/#{defense_period.id}"
+      pub_directory = "public/packages/#{defense_period.id}"
+      base_package = "" # TODO fill in
+      FileUtils.mkdir_p(directory) unless File.directory?(directory)
+      Player.find_each do |player|
+        # Get the most recent defend period id
+        current_file_path = storage_base + "/#{player.id}"
+        public_file_path = pub_directory + "/#{player.id}"
+        if File.exists?(current_file_path) and player.integrities.last.success
+          File.open(current_file_path, 'rb') do |app|
+            File.open(public_file_path, 'wb') do |pub|
+              pub.write(app.read)
+            end
+          end
+        else
+          File.open(base_package, 'rb') do |app|
+            File.open(public_file_path, 'wb') do |pub|
+              pub.write(app.read)
+            end
+          end
+        end
+      end
+    end
+    desc "Challenge server startup"
+    task :challenge_server_startup, [:challenge, :type, :host, :starting_port, :app_sig, :db_name, :db_user, :db_pass] => :environment do |t, args|
+      challenge server = "" # TODO fill in where to retrieve and how
+      Player.find_each do |player|
+        port = args[:starting_port] + player.id # Unique port for each player
+
+      end
+    end
+    desc "Dummy server startup"
+    task :dummy_server_startup, [:challenge, :type, :host, :starting_port, :db_name, :db_user, :db_pass] => :environment do |t, args|
+      challenge_server_file_path = "" # TODO fill in where to retrieve and how
+      port = args[:starting_port]
+      puts `flag=foundme host=#{args[:host]} port=#{args[:port]} dbname=#{args[:db_name]}
+        dbuser=#{args[:db_user]} dbpass=#{args[:db_port]} #{args[:type]} #{challenge_server_file_path}`
+    end
+  end
   namespace :test do
     desc "Load successful test flag submissions"
     task :successful_flag_submissions_for_period, [:user_id, :owner_id, :attack_start] => :environment do |t, args|
