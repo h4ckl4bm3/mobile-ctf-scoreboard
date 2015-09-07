@@ -147,12 +147,19 @@ namespace :mobile_ctf_scoreboard do
     end
     desc "Dummy server startup"
     task :dummy_server_startup, [:challenge, :type, :host, :starting_port, :db_name, :db_user, :db_pass] => :environment do |t, args|
-      challenge_server_file_path = "" # TODO fill in where to retrieve and how
+      challenge_path = "" # TODO fill in where to retrieve and how
       port = args[:starting_port]
-      puts `flag=foundme host=#{args[:host]} port=#{args[:port]} dbname=#{args[:db_name]}
-        dbuser=#{args[:db_user]} dbpass=#{args[:db_port]} #{args[:type]} #{challenge_server_file_path}`
+      run_server(challenge_path, args[:type], args[:host], port, 'foundme', args[:db_name], args[:db_user], args[:db_pass])
+    end
+
+    def run_server(challenge_path, type, host, port, flag, db_name, db_user, db_pass)
+      # may want to come up with another way to kill the current process on the port
+      `sudo kill -9 $(sudo lsof -t -i:#{port})`
+      puts `flag=#{flag} host=#{host} port=#{port} dbname=#{db_name}
+        dbuser=#{db_user} dbpass=#{db_port} #{type} #{challenge_path}`
     end
   end
+
   namespace :test do
     desc "Load successful test flag submissions"
     task :successful_flag_submissions_for_period, [:user_id, :owner_id, :attack_start] => :environment do |t, args|
