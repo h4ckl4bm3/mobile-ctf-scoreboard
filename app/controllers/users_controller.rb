@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :enforce_access, only: [ :myteam, :upload_package ]
+  before_filter :enforce_access, except: [ :index ]
   def index
     @teams = Player.all.order(:id)
-    @last_defense_period = DefendPeriod.where('finish <= :current_time', {current_time: Time.now}).order(finish: :desc).first
     @title = "Teams"
   end
 
@@ -44,6 +43,23 @@ class UsersController < ApplicationController
     FileUtils.mkdir_p(directory) unless File.directory?(directory)
     File.open(file_path, 'wb') do |file|
       file.write(params[:app].read)
+    end
+  end
+
+  def download_challenge_app
+    player = Player.find_by(id: params[:id])
+    # IDEA should we allow acces when there is no attack period?
+    if player
+      @last_defense_period = DefendPeriod.where('finish <= :current_time', {current_time: Time.now}).order(finish: :desc).first
+      if @last_defense_period
+        directory = "/opt/packages/#{@last_defense_period.id}"
+        file_path = File.join(directory, "/#{params[:id].to_s}.zip")
+        send_file(file_path) if File.exists?(file_path)
+      else
+        # return the base_app
+        base_challenge_app = "#{@last_defense_period.id}" # TODO fill this in with where this is located
+        send_file(base_challenge_app) if File.exists?(base_challenge_app)
+      end
     end
   end
 end
