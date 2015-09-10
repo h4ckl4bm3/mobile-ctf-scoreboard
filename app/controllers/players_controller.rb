@@ -32,17 +32,17 @@ class PlayersController < ApplicationController
       # Assumes failures have been modified to be the base
       if @attack_period
         directory = "#{UPLOAD_PACKAGE_PATH}#{@attack_period.id}"
-        file_path = File.join(directory, "/#{player.id.to_s}.zip")
+        file_path = File.join(directory, "/#{player.id.to_s}.apk")
         if File.exists?(file_path)
-          send_file(file_path)
+          send_file(file_path, filename: "team#{player.id}_#{challenge_folder}.apk")
         else
-          @error_message = "no challenge package available for this team."
+          @error_message = "no challenge apk available for this team."
         end
       else
         @error_message = "no attack period currently running. Please check back during the next attack period."
       end
     else
-      @error_message = "no player found for this id."
+      @error_message = "player not found."
     end
     @title = "Challenge app download error"
   end
