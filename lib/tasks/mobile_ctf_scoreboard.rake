@@ -146,25 +146,26 @@ namespace :mobile_ctf_scoreboard do
         end
       end
     end
+    CHALLENGE_BASE = Rails.application.config.assets.challenge_base
+    CHALLENGE_FOLDERS = Rails.application.config.assets.challenge_folders
     desc "Challenge server startup"
-    task :challenge_server_startup, [:challenge, :host, :starting_port, :app_sig, :opts] => :environment do |t, args|
-      challenge server = "" # TODO fill in where to retrieve and how
+    task :challenge_server_startup, [:challenge, :host, :starting_port, :opts] => :environment do |t, args|
+      challenge_server = "#{CHALLENGE_BASE}#{CHALLENGE_FOLDERS[args[:challenge].intern]}/server.rb"
       Player.find_each do |player|
         port = args[:starting_port] + player.id # Unique port for each player
-        run_server(challenge_path, args[:host], port, args[:flag], args[:opts])
+        run_server(challenge_server, args[:host], port, args[:flag], args[:opts])
       end
     end
     desc "Dummy server startup"
     task :dummy_server_startup, [:challenge, :host, :starting_port, :opts] => :environment do |t, args|
-      challenge_path = "" # TODO fill in where to retrieve and how
+      challenge_server = "#{CHALLENGE_BASE}#{CHALLENGE_FOLDERS[args[:challenge].intern]}/server.rb"
       port = args[:starting_port]
-      run_server(challenge_path, args[:host], port, 'foundme', args[:db_name], args[:db_user], args[:db_pass])
+      run_server(challenge_server, args[:host], port, 'foundme', args[:opts])
     end
-
-    def run_server(challenge_path, type, host, port, flag, opts)
-      # may want to come up with another way to kill the current process on the port
-      `sudo kill -9 $(sudo lsof -t -i:#{port})`
-      puts `flag=#{flag} host=#{host} port=#{port} opts=#{opts.to_s} ruby #{challenge_path}`
+    def run_server(challenge_server, host, port, flag, opts)
+      # May want to come up with another way to kill the current process on the port
+      `kill -9 $(lsof -t -i:#{port})`
+      system("flag=#{flag} opts=#{opts.gsub(' ',',')} nohup ruby #{challenge_server} -o #{host} -p #{port} -e #{Rails.env} &")
     end
   end
 

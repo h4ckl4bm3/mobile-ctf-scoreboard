@@ -25,7 +25,7 @@ module MobileCtfScoreboard
 
     # File paths for the challenges
     config.assets.challenge_folders = {
-      challenge1: 'test',
+      challenge1: 'color',
       challenge2: 'test2',
       challenge3: 'test3'
     }

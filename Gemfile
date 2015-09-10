@@ -29,6 +29,7 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'multi_json'
 
+gem 'sinatra'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
