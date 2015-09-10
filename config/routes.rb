@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :teams, controller: 'users',  only: [:index]
   get 'myteam', :to => 'users#myteam'
-  post 'uploadpackage', :to => 'users#upload_package'
+  post 'uploadpackage', :to => 'players#upload_package'
+  get 'download_challenge_app/:id', :to => 'players#download_challenge_app'
+  get 'download_challenge_base', :to => 'players#download_challenge_base'
 
   # devise
   devise_for :users

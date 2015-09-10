@@ -20,6 +20,16 @@ module MobileCtfScoreboard
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Base path to use for the challenges (where challenges will be stored)
+    config.assets.challenge_base = 'resources/challenges/'
+
+    # File paths for the challenges
+    config.assets.challenge_folders = {
+      challenge1: 'color',
+      challenge2: 'test2',
+      challenge3: 'color'
+    }
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end
