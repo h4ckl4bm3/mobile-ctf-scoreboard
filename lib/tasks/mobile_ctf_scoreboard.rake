@@ -138,25 +138,24 @@ namespace :mobile_ctf_scoreboard do
       end
     end
     desc "Challenge server startup"
-    task :challenge_server_startup, [:challenge, :type, :host, :starting_port, :app_sig, :db_name, :db_user, :db_pass] => :environment do |t, args|
+    task :challenge_server_startup, [:challenge, :host, :starting_port, :app_sig, :opts] => :environment do |t, args|
       challenge server = "" # TODO fill in where to retrieve and how
       Player.find_each do |player|
         port = args[:starting_port] + player.id # Unique port for each player
-
+        run_server(challenge_path, args[:host], port, args[:flag], args[:opts])
       end
     end
     desc "Dummy server startup"
-    task :dummy_server_startup, [:challenge, :type, :host, :starting_port, :db_name, :db_user, :db_pass] => :environment do |t, args|
+    task :dummy_server_startup, [:challenge, :host, :starting_port, :opts] => :environment do |t, args|
       challenge_path = "" # TODO fill in where to retrieve and how
       port = args[:starting_port]
-      run_server(challenge_path, args[:type], args[:host], port, 'foundme', args[:db_name], args[:db_user], args[:db_pass])
+      run_server(challenge_path, args[:host], port, 'foundme', args[:db_name], args[:db_user], args[:db_pass])
     end
 
-    def run_server(challenge_path, type, host, port, flag, db_name, db_user, db_pass)
+    def run_server(challenge_path, type, host, port, flag, opts)
       # may want to come up with another way to kill the current process on the port
       `sudo kill -9 $(sudo lsof -t -i:#{port})`
-      puts `flag=#{flag} host=#{host} port=#{port} dbname=#{db_name}
-        dbuser=#{db_user} dbpass=#{db_port} #{type} #{challenge_path}`
+      puts `flag=#{flag} host=#{host} port=#{port} opts=#{opts.to_s} ruby #{challenge_path}`
     end
   end
 
