@@ -83,6 +83,15 @@ namespace :mobile_ctf_scoreboard do
           UserMessage.create!(user: player, message: message)
         end
       end
+
+      desc 'Zip packages'
+      task :zip_packages, [:subject, :message, :sent_at] => [:environment] do |t, args|
+        sent_at = args[:sent_at].to_time if args[:sent_at]
+        message = Message.create!(subject: args[:subject], message: args[:message], sent_at: sent_at, sent_to: 'All')
+        Player.find_each do |player|
+          UserMessage.create!(user: player, message: message)
+        end
+      end
     end
   end
   namespace :update do
