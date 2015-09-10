@@ -27,7 +27,7 @@ module MobileCtfScoreboard
     config.assets.challenge_folders = {
       challenge1: 'color',
       challenge2: 'test2',
-      challenge3: 'test3'
+      challenge3: 'color'
     }
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

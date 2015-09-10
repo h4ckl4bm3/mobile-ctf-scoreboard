@@ -25,10 +25,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use devise for authentication
 gem 'devise'
-#Use bootstrap sass for layout
+# Use bootstrap sass for layout
 gem 'bootstrap-sass'
 gem 'multi_json'
 
+# Used for challenges
 gem 'sinatra'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

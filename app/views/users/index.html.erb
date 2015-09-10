@@ -40,7 +40,7 @@
             </td>
             <% if current_user %>
               <td>
-                <%= link_to "teams_app.zip", "/download_challenge_app/#{current_user.id}" %>
+                <%= link_to "your_app.apk", "/download_challenge_app/#{current_user.id}" %>
               </td>
             <% end %>
           </tr>
@@ -63,7 +63,7 @@
                 </td>
                 <% if current_user %>
                   <td>
-                    <%= link_to "teams_app.zip", "/download_challenge_app/#{team.id}" %>
+                    <%= link_to "team#{team.id}_app.apk", "/download_challenge_app/#{team.id}" %>
                   </td>
                 <% end %>
               </tr>
